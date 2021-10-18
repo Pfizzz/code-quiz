@@ -26,26 +26,27 @@ let intervalId;
 
 // QUIZ FUNCTIONS
 
-// start function
-
-//we need to reveal the first question
+// runs on page load (...)
 const pageLoad = () => {
-  // First function to execute
-  const quizContainerEl = document.createElement("div");
+  // start container creation
+  const startContainer = document.createElement("div");
+  startContainer.classList = "container center-align"
+  startContainer.innerHTML =
+    "<h1>pop() Quiz!</h1> <p class='flow-text'>Ready to flex those javaScript muscles? Click the button below and get ready to think fast! A wrong answer will deduct from your time!</p>";
+  startEl.appendChild(startContainer);
+
+  // start button creation
+  const startButton = document.createElement("button");
+  startButton.textContent = "Start";
+  startButton.setAttribute("class", "btn start-button red white-text");
+  startButton.setAttribute("id", "startId");
+  startContainer.appendChild(startButton)
 
 
-      const startButton = document.createElement("button");
-      startButton.textContent = "Start";
-      startButton.setAttribute("class", "start-button red white-text");
-      startButton.setAttribute("id", "startId");
-
-      startEl.appendChild(startButton)
 
 
+};
 
-     
-    };
-  
 
 function endQuiz() {
   clearInterval(intervalId);
@@ -61,17 +62,18 @@ function updateTime() {
   }
 }
 
-function renderQuestion() {
-  
+// creates the question and appends
+const renderQuestion = () => {
+
   if (time == 0) {
     updateTime();
     return;
   }
 
   intervalId = setInterval(updateTime, 1000);
-  
-  questionEl.textContent = questions[questionIndex].question;
 
+  questionEl.textContent = questions[questionIndex].question;
+  questionEl.classList = "center-align purple-text";
   optionListEl.innerHTML = "";
   questionResultEl.innerHTML = "";
 
@@ -79,11 +81,13 @@ function renderQuestion() {
 
   for (let i = 0; i < choices.length; i++) {
     let questionListItem = document.createElement("li");
+    questionListItem.classList = "center-align";
     questionListItem.textContent = choices[i];
     optionListEl.append(questionListItem);
   }
 }
 
+// increments the question index and renders next question
 function nextQuestion() {
   questionIndex++;
   if (questionIndex === questions.length) {
@@ -113,10 +117,10 @@ function checkAnswer(event) {
 //When the page first loads.
 pageLoad();
 
-// shows first question after click
+// after first click, renders first question
 const startButton = document.querySelector(".start-button");
 startButton.addEventListener("click", renderQuestion);
-// make an event listener to hide the start button after the first click
+// hides the start div after first click
 startButton.addEventListener("click", (e) => {
   console.log("clicked!!!");
   document.getElementById("start").style.display = 'none';

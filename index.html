@@ -11,7 +11,19 @@
 
 <body>
   <div id="quiz-wrapper" class="container">
-    <div id="timer"></div>
+    <header class="row" id="header-wrapper">
+    <!-- score div-->
+    <div class="col s6" id="score">
+      <p>High Score:</p>
+    </div>
+    <!-- timer div -->
+    <div class="col s6" id="timer">
+      <p>Time:</p>
+    </div>
+  </header>
+  <div class="divider"></div>
+
+  <div class="row" id="start"></div>
 
     <div id="question"></div>
 
@@ -19,10 +31,10 @@
 
     <div id="question-result"></div>
 
-    <div class="row teal-text" id="start"></div>
+
   </div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  
   <script src="./assets/js/script.js"></script>
 </body>
 
