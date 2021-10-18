@@ -5,6 +5,7 @@ const optionListEl = document.querySelector("#option-list");
 const questionResultEl = document.querySelector("#question-result");
 const timerEl = document.querySelector("#timer");
 
+
 let questionIndex = 0;
 let correctCount = 0;
 
@@ -24,7 +25,8 @@ let questions = [
     answer: "parentheses",
   },
 ];
-
+ // array to set high scores into for localstorage
+let highScores = [];
 
 // QUIZ FUNCTIONS
 
@@ -42,21 +44,34 @@ const pageLoad = () => {
   startButton.textContent = "Start";
   startButton.setAttribute("class", "btn start-button red white-text");
   startButton.setAttribute("id", "startId");
-  startContainer.appendChild(startButton)
-
-
-
-
+  startContainer.appendChild(startButton);
 };
 
 // displays score 
-function endQuiz() {
+const endQuiz = () => {
   clearInterval(intervalId);
   timerEl.textContent = '';
   questionResultEl.innerHTML = "";
   optionListEl.innerHTML = "";
-  questionEl.innerHTML = "Game over, You scored " + correctCount;
-}
+  questionEl.innerHTML = "Game over, You scored " 
+  + correctCount
+  + "<br/>";
+
+  // add button to restart quiz
+const restartButton = document.createElement("button");
+restartButton.setAttribute("class", "btn red");
+restartButton.setAttribute("id", "restart-button");
+restartButton.textContent = "Restart";
+questionEl.appendChild(restartButton);
+restartButton.addEventListener("click", (e) => {
+  console.log("clicked button");
+  document.location.reload (true);
+})
+// restart button listener
+var restart = document.querySelector("#restart-button");
+console.log(restart);
+};
+
 
 function updateTime() {
   time--;
@@ -126,7 +141,6 @@ const startButton = document.querySelector(".start-button");
 startButton.addEventListener("click", renderQuestion);
 // hides the start div after first click
 startButton.addEventListener("click", (e) => {
-  console.log("clicked!!!");
   document.getElementById("start").style.display = 'none';
 });
 
