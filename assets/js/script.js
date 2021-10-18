@@ -15,15 +15,33 @@ let intervalId;
 
 let questions = [
   {
-    question: "Commonly used data types DO NOT include:",
-    choices: ["strings", "booleans", "alerts", "numbers"],
-    answer: "alerts",
+    question: "document.querySelector('#wrapper'); will select an html element by its...?",
+    choices: ["class", "id", "data-type", "wrapper"],
+    answer: "id",
   },
   {
     question:
-      "The condition in an if / else statement is enclosed within ____.",
-    choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-    answer: "parentheses",
+      "Where should we prevent a browser's default response?",
+    choices: ["A submit button's event listener", "When the first function on a page is called", "When a button is querySelected", "Never"],
+    answer: "A submit button's event listener",
+  },
+  {
+    question:
+      "What does the acronym 'API' represent?",
+    choices: ["Auto-Programming Interface", "Application Processing Integer", "Automatic Program Inception", "Application Programming Interface"],
+    answer: "Application Programming Interface",
+  },
+  {
+    question:
+      "What is the only data type that can be stores in local storage?",
+    choices: ["string", "integer", "JSON", "XML"],
+    answer: "string",
+  },
+  {
+    question:
+      "Write should you write to execute a block of code repeatedly?",
+    choices: ["if statement", "while loop", "if loop", "for loop"],
+    answer: "for loop",
   },
 ];
 
