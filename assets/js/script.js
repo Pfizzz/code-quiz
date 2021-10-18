@@ -49,11 +49,13 @@ const pageLoad = () => {
 
 };
 
-
+// displays score 
 function endQuiz() {
   clearInterval(intervalId);
-  let body = document.body;
-  body.innerHTML = "Game over, You scored " + correctCount;
+  timerEl.textContent = '';
+  questionResultEl.innerHTML = "";
+  optionListEl.innerHTML = "";
+  questionEl.innerHTML = "Game over, You scored " + correctCount;
 }
 
 function updateTime() {
