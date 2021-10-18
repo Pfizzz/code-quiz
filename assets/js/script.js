@@ -6,6 +6,7 @@ const questionResultEl = document.querySelector("#question-result");
 const timerEl = document.querySelector("#timer");
 
 
+
 let questionIndex = 0;
 let correctCount = 0;
 
@@ -80,9 +81,9 @@ const endQuiz = () => {
     }
     highScores.push(userDataObj);
     window.localStorage.setItem("highscores", JSON.stringify(highScores));
-
+        // redirect to next page
+        window.location.href = "scores.html";
   })
-
 
   // button to restart quiz
   const restartButton = document.createElement("button");
@@ -118,13 +119,15 @@ const renderQuestion = () => {
   questionEl.classList = "center-align flow-text blue-text";
   optionListEl.innerHTML = "";
   questionResultEl.innerHTML = "";
+  questionResultEl.classList = "center-align";
 
   let choices = questions[questionIndex].choices;
 
   for (let i = 0; i < choices.length; i++) {
     let questionListItem = document.createElement("li");
-    questionListItem.classList = "center-align";
+    questionListItem.classList = "center-align white z-depth-4";
     questionListItem.textContent = choices[i];
+    optionListEl.classList = "flow-text blue-text pulse";
     optionListEl.append(questionListItem);
   }
 }
@@ -144,48 +147,17 @@ function checkAnswer(event) {
     let answer = event.target.textContent;
     if (answer === questions[questionIndex].answer) {
       questionResultEl.textContent = "Correct";
+      questionResultEl.classList = "green center-align white-text flow-text";
       correctCount++;
     } else {
       questionResultEl.textContent = "Incorrect";
+      questionResultEl.classList = "red center-align white-text flow-text";
       time = time - 2;
       timerEl.textContent = time;
     }
   }
   setTimeout(nextQuestion, 2000);
 }
-
-
-// loaf from local storage
-const loadScore = () => {
-  let savedScore = localStorage.getItem("highscores") || [];
-  if (!savedScore) {
-    return false;
-  }
-  // console.log(savedScore);
-  savedScore = JSON.parse(savedScore);
-  // highScores.push(savedScore);
-  console.log(savedScore);
-}
-
-// function printHighscores() {
-//   // either get scores from localstorage or set to empty array
-//   var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
-
-//   // sort highscores by score property in descending order
-//   highscores.sort(function(a, b) {
-//     return b.score - a.score;
-//   });
-
-//   highscores.forEach(function(score) {
-//     // create li tag for each high score
-//     var liTag = document.createElement("li");
-//     liTag.textContent = score.initials + " - " + score.score;
-
-//     // display on page
-//     var olEl = document.getElementById("highscores");
-//     olEl.appendChild(liTag);
-//   });
-// }
 
 pageLoad();
 
