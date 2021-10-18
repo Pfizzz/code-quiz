@@ -69,11 +69,20 @@ const endQuiz = () => {
     <button class="btn blue waves col s3" id="save-user" type="submit">Submit</button>
   </div>`;
   questionEl.appendChild(scoreForm);
+  // save user and score
   var saveButton = scoreForm.querySelector("#save-user");
   saveButton.addEventListener("click", (e) =>{
     e.preventDefault();
-    console.log("clicked save");
+    let userInput = scoreForm.querySelector("input[name='user-name']").value;
+
+    const userDataObj = {
+      name: userInput,
+      score: correctCount
+    }
+    highScores.push(userDataObj);
+    saveScore(userDataObj);
   })
+
 
   // button to restart quiz
   const restartButton = document.createElement("button");
@@ -82,7 +91,6 @@ const endQuiz = () => {
   restartButton.textContent = "Restart";
   questionEl.appendChild(restartButton);
   restartButton.addEventListener("click", (e) => {
-    console.log("clicked button");
     document.location.reload(true);
   });
 };
@@ -146,9 +154,26 @@ function checkAnswer(event) {
   setTimeout(nextQuestion, 2000);
 }
 
+// save to local storage
+const saveScore = () => {
+  localStorage.setItem("highscores", JSON.stringify(highScores));
+}
 
+// loaf from local storage
+const loadScore = () => {
+  let savedScore = localStorage.getItem("highscores");
+  if (!savedScore) {
+    return false;
+  }
+  // console.log(savedScore);
+  savedScore = JSON.parse(savedScore);
+  highScores.push(savedScore);
+  // console.log(highScores);
+}
 
 //When the page first loads.
+loadScore();
+console.log(highScores);
 pageLoad();
 
 // after first click, renders first question
