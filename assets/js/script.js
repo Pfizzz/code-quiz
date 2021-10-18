@@ -10,7 +10,7 @@ const timerEl = document.querySelector("#timer");
 let questionIndex = 0;
 let correctCount = 0;
 
-let time = 20;
+let time = 60;
 let intervalId;
 
 let questions = [
@@ -54,7 +54,7 @@ const endQuiz = () => {
   timerEl.textContent = '';
   questionResultEl.innerHTML = "";
   optionListEl.innerHTML = "";
-  questionEl.innerHTML = "Game over, You scored "
+  questionEl.innerHTML = "The End! You scored "
     + correctCount
     + "<br/>";
 
@@ -72,7 +72,17 @@ const endQuiz = () => {
   var saveButton = scoreForm.querySelector("#save-user");
   saveButton.addEventListener("click", (e) =>{
     e.preventDefault();
+
+// write if to validate
+
     let userInput = scoreForm.querySelector("input[name='user-name']").value;
+    if (!userInput) {
+      alert("Please enter your initials, Donkey-Kong style (up to 3 characters).");
+      return;
+    } else if (userInput.length > 3) {
+      alert("Please enter your initials, Donkey-Kong style (up to 3 characters).");
+      return;
+    } else {
     var highScores =
     JSON.parse(window.localStorage.getItem("highscores")) || [];
     const userDataObj = {
@@ -83,6 +93,7 @@ const endQuiz = () => {
     window.localStorage.setItem("highscores", JSON.stringify(highScores));
         // redirect to next page
         window.location.href = "scores.html";
+  }
   })
 
   // button to restart quiz

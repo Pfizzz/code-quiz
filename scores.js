@@ -16,7 +16,7 @@ const displayScores = () => {
     });
     highscores.forEach(function (score) {
         const champion = document.createElement("li");
-        champion.classList = "flow-text";
+        champion.classList = "flow-text squeeze";
         champion.textContent = score.name + " - " + score.score;
         scoreBox.appendChild(champion);
     })
