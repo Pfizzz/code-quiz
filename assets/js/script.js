@@ -25,7 +25,7 @@ let questions = [
     answer: "parentheses",
   },
 ];
- // array to set high scores into for localstorage
+// array to set high scores into for localstorage
 let highScores = [];
 
 // QUIZ FUNCTIONS
@@ -47,29 +47,27 @@ const pageLoad = () => {
   startContainer.appendChild(startButton);
 };
 
-// displays score 
+// END QUIZ 
+
+//displays score 
 const endQuiz = () => {
   clearInterval(intervalId);
   timerEl.textContent = '';
   questionResultEl.innerHTML = "";
   optionListEl.innerHTML = "";
-  questionEl.innerHTML = "Game over, You scored " 
-  + correctCount
-  + "<br/>";
-
-  // add button to restart quiz
-const restartButton = document.createElement("button");
-restartButton.setAttribute("class", "btn red");
-restartButton.setAttribute("id", "restart-button");
-restartButton.textContent = "Restart";
-questionEl.appendChild(restartButton);
-restartButton.addEventListener("click", (e) => {
-  console.log("clicked button");
-  document.location.reload (true);
-})
-// restart button listener
-var restart = document.querySelector("#restart-button");
-console.log(restart);
+  questionEl.innerHTML = "Game over, You scored "
+    + correctCount
+    + "<br/>";
+  // button to restart quiz
+  const restartButton = document.createElement("button");
+  restartButton.setAttribute("class", "btn red");
+  restartButton.setAttribute("id", "restart-button");
+  restartButton.textContent = "Restart";
+  questionEl.appendChild(restartButton);
+  restartButton.addEventListener("click", (e) => {
+    console.log("clicked button");
+    document.location.reload(true);
+  });
 };
 
 
@@ -92,7 +90,7 @@ const renderQuestion = () => {
   intervalId = setInterval(updateTime, 1000);
 
   questionEl.textContent = questions[questionIndex].question;
-  questionEl.classList = "center-align purple-text";
+  questionEl.classList = "center-align flow-text blue-text";
   optionListEl.innerHTML = "";
   questionResultEl.innerHTML = "";
 
