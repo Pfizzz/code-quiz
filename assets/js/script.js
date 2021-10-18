@@ -58,6 +58,23 @@ const endQuiz = () => {
   questionEl.innerHTML = "Game over, You scored "
     + correctCount
     + "<br/>";
+
+  //form to enter name
+  const scoreForm = document.createElement("form");
+  scoreForm.setAttribute("id", "score-form-wrapper");
+  scoreForm.innerHTML = 
+  `<div class="valign-wrapper row">
+    <p class="col s4">Enter your initials:</p>
+    <input class="col s4" type="text" name="user-name" placeholder="MJP"/>
+    <button class="btn blue waves col s3" id="save-user" type="submit">Submit</button>
+  </div>`;
+  questionEl.appendChild(scoreForm);
+  var saveButton = scoreForm.querySelector("#save-user");
+  saveButton.addEventListener("click", (e) =>{
+    e.preventDefault();
+    console.log("clicked save");
+  })
+
   // button to restart quiz
   const restartButton = document.createElement("button");
   restartButton.setAttribute("class", "btn red");
