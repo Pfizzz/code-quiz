@@ -1,7 +1,8 @@
-const scoreEl= document.querySelector("#score-display");
+const scoreEl = document.querySelector("#score-display");
+const resetButton = document.querySelector("#reset-scores");
 
-  // print scores on scores page
-  const displayScores = () => {
+// print scores on scores page
+const displayScores = () => {
     let highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
     const scoreBox = document.createElement("div");
     scoreBox.classList = "center-align";
@@ -13,11 +14,20 @@ const scoreEl= document.querySelector("#score-display");
     highscores.sort((a, b) => {
         return b.score - a.score;
     });
-    highscores.forEach(function(score) {
+    highscores.forEach(function (score) {
         const champion = document.createElement("li");
-        champion.textContent = score.name + " - " + score.score; 
+        champion.classList = "flow-text";
+        champion.textContent = score.name + " - " + score.score;
         scoreBox.appendChild(champion);
     })
-  }
+}
 
-  displayScores();
+// clear local storage
+const clearStorage = () => {
+    window.localStorage.removeItem("highscores");
+    window.location.reload();
+}
+
+displayScores();
+
+resetButton.addEventListener("click", clearStorage);
