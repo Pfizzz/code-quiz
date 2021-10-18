@@ -1,3 +1,16 @@
+const quizEl = document.querySelector("#quiz-wrapper");
+const startEl = document.querySelector("#start");
+const questionEl = document.querySelector("#question");
+const optionListEl = document.querySelector("#option-list");
+const questionResultEl = document.querySelector("#question-result");
+const timerEl = document.querySelector("#timer");
+
+let questionIndex = 0;
+let correctCount = 0;
+
+let time = 20;
+let intervalId;
+
 let questions = [
   {
     question: "Commonly used data types DO NOT include:",
@@ -11,18 +24,7 @@ let questions = [
     answer: "parentheses",
   },
 ];
-const quizEl = document.querySelector("#quiz-wrapper");
-const startEl = document.querySelector("#start");
-const questionEl = document.querySelector("#question");
-const optionListEl = document.querySelector("#option-list");
-const questionResultEl = document.querySelector("#question-result");
-const timerEl = document.querySelector("#timer");
 
-let questionIndex = 0;
-let correctCount = 0;
-
-let time = 20;
-let intervalId;
 
 // QUIZ FUNCTIONS
 
