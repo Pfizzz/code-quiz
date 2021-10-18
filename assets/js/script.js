@@ -25,8 +25,6 @@ let questions = [
     answer: "parentheses",
   },
 ];
-// array to set high scores into for localstorage
-let highScores = [];
 
 // QUIZ FUNCTIONS
 
@@ -74,13 +72,15 @@ const endQuiz = () => {
   saveButton.addEventListener("click", (e) =>{
     e.preventDefault();
     let userInput = scoreForm.querySelector("input[name='user-name']").value;
-
+    var highScores =
+    JSON.parse(window.localStorage.getItem("highscores")) || [];
     const userDataObj = {
       name: userInput,
       score: correctCount
     }
     highScores.push(userDataObj);
-    saveScore(userDataObj);
+    window.localStorage.setItem("highscores", JSON.stringify(highScores));
+
   })
 
 
@@ -154,26 +154,39 @@ function checkAnswer(event) {
   setTimeout(nextQuestion, 2000);
 }
 
-// save to local storage
-const saveScore = () => {
-  localStorage.setItem("highscores", JSON.stringify(highScores));
-}
 
 // loaf from local storage
 const loadScore = () => {
-  let savedScore = localStorage.getItem("highscores");
+  let savedScore = localStorage.getItem("highscores") || [];
   if (!savedScore) {
     return false;
   }
   // console.log(savedScore);
   savedScore = JSON.parse(savedScore);
-  highScores.push(savedScore);
-  // console.log(highScores);
+  // highScores.push(savedScore);
+  console.log(savedScore);
 }
 
-//When the page first loads.
-loadScore();
-console.log(highScores);
+// function printHighscores() {
+//   // either get scores from localstorage or set to empty array
+//   var highscores = JSON.parse(window.localStorage.getItem("highscores")) || [];
+
+//   // sort highscores by score property in descending order
+//   highscores.sort(function(a, b) {
+//     return b.score - a.score;
+//   });
+
+//   highscores.forEach(function(score) {
+//     // create li tag for each high score
+//     var liTag = document.createElement("li");
+//     liTag.textContent = score.initials + " - " + score.score;
+
+//     // display on page
+//     var olEl = document.getElementById("highscores");
+//     olEl.appendChild(liTag);
+//   });
+// }
+
 pageLoad();
 
 // after first click, renders first question
